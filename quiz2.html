@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz - Manejo de inventario | PedidosYa Partners</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rosa: #FA0050;
+      --celeste: #61C8FA;
+      --blanco: #FFFFFF;
+      --gris-fondo: #F7F7F7;
+      --negro: #111217;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: var(--gris-fondo);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: var(--rosa);
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .quiz-container {
+      background-color: var(--blanco);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 700px;
+      padding: 30px 40px;
+      text-align: left;
+    }
+
+    .question {
+      margin-bottom: 25px;
+    }
+
+    .question h3 {
+      margin-bottom: 10px;
+      color: var(--negro);
+      font-weight: 600;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+      background: #f2f2f2;
+      padding: 10px 14px;
+      border-radius: 10px;
+      transition: 0.3s ease;
+    }
+
+    label:hover {
+      background-color: var(--celeste);
+      color: var(--blanco);
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    .btn {
+      background-color: var(--rosa);
+      color: var(--blanco);
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 36px;
+      margin-top: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background-color: #ff3377;
+      transform: scale(1.03);
+    }
+
+    #result {
+      margin-top: 25px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--rosa);
+      text-align: center;
+    }
+
+    #nextModuleBtn {
+      display: none;
+      opacity: 0;
+      margin-top: 25px;
+      background-color: var(--rosa);
+      color: var(--blanco);
+      border: none;
+      padding: 14px 36px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.5s ease;
+      width: 100%;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    #nextModuleBtn:hover {
+      background-color: #ff3377;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Quiz: Manejo de inventario</h1>
+
+  <div class="quiz-container">
+    <form id="quizForm">
+      <div class="question">
+        <h3>1. ¿Qué debes hacer si un producto del pedido está fuera de stock?</h3>
+        <label><input type="radio" name="q1" value="a">Rechazar el pedido inmediatamente</label>
+        <label><input type="radio" name="q1" value="b">Ignorar la orden hasta que expire</label>
+        <label><input type="radio" name="q1" value="c">Esperar que el motorista lo cancele</label>
+        <label><input type="radio" name="q1" value="d">Llamar al cliente para ofrecerle un reemplazo del mismo valor</label>
+      </div>
+
+      <div class="question">
+        <h3>2. ¿Qué ocurre si el cliente acepta el reemplazo del producto?</h3>
+        <label><input type="radio" name="q2" value="a">Debes cancelar la orden de todos modos</label>
+        <label><input type="radio" name="q2" value="b">Puedes continuar con la orden y completar el pedido</label>
+        <label><input type="radio" name="q2" value="c">El pedido se marca como rechazado</label>
+        <label><input type="radio" name="q2" value="d">El sistema genera una nueva orden</label>
+      </div>
+
+      <div class="question">
+        <h3>3. ¿Desde qué apartado del POS puedes actualizar tu inventario?</h3>
+        <label><input type="radio" name="q3" value="a">Desde el apartado “Órdenes aceptadas”</label>
+        <label><input type="radio" name="q3" value="b">Desde el historial de ventas</label>
+        <label><input type="radio" name="q3" value="c">Desde el apartado “Menú”</label>
+        <label><input type="radio" name="q3" value="d">Desde el panel de soporte</label>
+      </div>
+
+      <div class="question">
+        <h3>4. ¿Qué sucede si desactivas un producto solo por hoy?</h3>
+        <label><input type="radio" name="q4" value="a">El producto se elimina del sistema permanentemente</label>
+        <label><input type="radio" name="q4" value="b">Debes activarlo manualmente cada vez</label>
+        <label><input type="radio" name="q4" value="c">El producto desaparece del menú para siempre</label>
+        <label><input type="radio" name="q4" value="d">El sistema lo reactivará automáticamente al día siguiente</label>
+      </div>
+
+      <div class="question">
+        <h3>5. ¿Por qué es importante mantener tu stock actualizado en el POS?</h3>
+        <label><input type="radio" name="q5" value="a">Para evitar rechazos y no perder ventas</label>
+        <label><input type="radio" name="q5" value="b">Para aumentar los precios automáticamente</label>
+        <label><input type="radio" name="q5" value="c">Para que los riders ganen más pedidos</label>
+        <label><input type="radio" name="q5" value="d">Para modificar los tiempos de entrega</label>
+      </div>
+
+      <button type="button" id="submitBtn" class="btn" onclick="checkQuiz()">Enviar respuestas</button>
+    </form>
+
+    <div id="result"></div>
+
+    <button id="nextModuleBtn" onclick="goToNextModule()">
+      Ir al siguiente vídeo
+    </button>
+  </div>
+
+  <script>
+    //  Respuestas correctas
+    const correctAnswers = {
+      q1: "d",
+      q2: "b",
+      q3: "c",
+      q4: "d",
+      q5: "a"
+    };
+
+    function getAnswer(name) {
+      const el = document.querySelector(`input[name="${name}"]:checked`);
+      return el ? el.value : null;
+    }
+
+    function checkQuiz() {
+      const keys = Object.keys(correctAnswers);
+      const answers = {};
+      let missing = [];
+
+      for (const k of keys) {
+        const v = getAnswer(k);
+        if (v === null) missing.push(k);
+        answers[k] = v;
+      }
+
+      if (missing.length) {
+        alert("Por favor, responde todas las preguntas antes de enviar.");
+        return;
+      }
+
+      let score = 0;
+      for (const k of keys) {
+        if (answers[k] === correctAnswers[k]) score++;
+      }
+
+      const total = keys.length;
+      const passingScore = total === 5 ? 3 : 2; //  mínimo 3 correctas de 5 o 2 de 3
+      const result = document.getElementById("result");
+      const nextBtn = document.getElementById("nextModuleBtn");
+      const submitBtn = document.getElementById("submitBtn");
+
+      if (score >= passingScore) {
+        result.textContent = `Tu puntaje: ${score} / ${total}`;
+        submitBtn.style.display = "none";
+        nextBtn.style.display = "block";
+        nextBtn.style.animation = "fadeIn 0.8s ease forwards";
+      } else {
+        result.textContent = `Tu puntaje fue ${score}/${total}. Inténtalo nuevamente.`;
+        nextBtn.style.display = "none";
+      }
+
+      localStorage.setItem("quiz2_score", score);
+    }
+
+    function goToNextModule() {
+      localStorage.setItem("currentModule", 3);
+      window.location.href = "curso3.html";
+    }
+  </script>
+
+</body>
+</html>
+

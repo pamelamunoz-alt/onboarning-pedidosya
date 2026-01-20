@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz - Confirmación y proceso de órdenes | PedidosYa Partners</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rosa: #FA0050;
+      --celeste: #61C8FA;
+      --blanco: #FFFFFF;
+      --gris-fondo: #F7F7F7;
+      --negro: #111217;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: var(--gris-fondo);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: var(--rosa);
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .quiz-container {
+      background-color: var(--blanco);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 700px;
+      padding: 30px 40px;
+      text-align: left;
+    }
+
+    .question {
+      margin-bottom: 25px;
+    }
+
+    .question h3 {
+      margin-bottom: 10px;
+      color: var(--negro);
+      font-weight: 600;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+      background: #f2f2f2;
+      padding: 10px 14px;
+      border-radius: 10px;
+      transition: 0.3s ease;
+    }
+
+    label:hover {
+      background-color: var(--celeste);
+      color: var(--blanco);
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    .btn {
+      background-color: var(--rosa);
+      color: var(--blanco);
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 36px;
+      margin-top: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background-color: #ff3377;
+      transform: scale(1.03);
+    }
+
+    #result {
+      margin-top: 25px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--rosa);
+      text-align: center;
+    }
+
+    #nextModuleBtn {
+      display: none;
+      opacity: 0;
+      margin-top: 25px;
+      background-color: var(--rosa);
+      color: var(--blanco);
+      border: none;
+      padding: 14px 36px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.5s ease;
+      width: 100%;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    #nextModuleBtn:hover {
+      background-color: #ff3377;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Quiz: Confirmación y proceso de órdenes</h1>
+
+  <div class="quiz-container">
+    <form id="quizForm">
+      <div class="question">
+        <h3>1. ¿Qué debes hacer al recibir una nueva orden en el POS?</h3>
+        <label><input type="radio" name="q1" value="a">Ignorarla hasta que termine el contador</label>
+        <label><input type="radio" name="q1" value="b">Revisar los detalles del pedido y presionar “Aceptar pedido”</label>
+        <label><input type="radio" name="q1" value="c">Esperar a que el motorista confirme</label>
+        <label><input type="radio" name="q1" value="d">Marcarla como “Listo” inmediatamente</label>
+      </div>
+
+      <div class="question">
+        <h3>2. ¿Qué sucede si no aceptas la orden dentro del minuto establecido?</h3>
+        <label><input type="radio" name="q2" value="a">Se pospone automáticamente</label>
+        <label><input type="radio" name="q2" value="b">El cliente debe volver a pedir</label>
+        <label><input type="radio" name="q2" value="c">Se marca como completada</label>
+        <label><input type="radio" name="q2" value="d">Se cancela automáticamente</label>
+      </div>
+
+      <div class="question">
+        <h3>3. ¿Dónde puedes comunicarte con Soporte Técnico si tienes problemas con el POS?</h3>
+        <label><input type="radio" name="q3" value="a">En la sección “Ayuda en línea”</label>
+        <label><input type="radio" name="q3" value="b">En el menú principal</label>
+        <label><input type="radio" name="q3" value="c">En el apartado “Órdenes aceptadas”</label>
+        <label><input type="radio" name="q3" value="d">En la opción “Aceptar pedido”</label>
+      </div>
+
+      <div class="question">
+        <h3>4. ¿Qué debes hacer al finalizar la preparación del pedido?</h3>
+        <label><input type="radio" name="q4" value="a">Esperar a que el tiempo se agote</label>
+        <label><input type="radio" name="q4" value="b">Cancelar el pedido</label>
+        <label><input type="radio" name="q4" value="c">Marcar el pedido como “Listo”</label>
+        <label><input type="radio" name="q4" value="d">Notificar al motorista por teléfono</label>
+      </div>
+
+      <div class="question">
+        <h3>5. ¿Para qué sirve enviar un pedido de prueba desde el menú principal?</h3>
+        <label><input type="radio" name="q5" value="a">Para probar el sistema y aprender el flujo de órdenes</label>
+        <label><input type="radio" name="q5" value="b">Para recibir descuentos</label>
+        <label><input type="radio" name="q5" value="c">Para registrar más ventas</label>
+        <label><input type="radio" name="q5" value="d">Para contactar al soporte</label>
+      </div>
+
+      <button type="button" id="submitBtn" class="btn" onclick="checkQuiz()">Enviar respuestas</button>
+    </form>
+
+    <div id="result"></div>
+
+    <button id="nextModuleBtn" onclick="window.location.href='curso2.html'">
+      Ir al siguiente vídeo
+    </button>
+  </div>
+
+  <script>
+  // Clave de respuestas correctas
+  const correctAnswers = {
+    q1: "b",
+    q2: "d",
+    q3: "a",
+    q4: "c",
+    q5: "a"
+  };
+
+  function getAnswer(name) {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : null;
+  }
+
+  function checkQuiz() {
+    const keys = Object.keys(correctAnswers);
+    const answers = {};
+    let missing = [];
+
+    for (const k of keys) {
+      const v = getAnswer(k);
+      if (v === null) missing.push(k);
+      answers[k] = v;
+    }
+
+    if (missing.length) {
+      alert("Por favor, responde todas las preguntas antes de enviar.");
+      return;
+    }
+
+    let score = 0;
+    for (const k of keys) {
+      if (answers[k] === correctAnswers[k]) score++;
+    }
+
+    const total = keys.length;
+    const passingScore = total === 5 ? 3 : 2; //  3 correctas de 5 o 2 de 3
+    const result = document.getElementById("result");
+    const nextBtn = document.getElementById("nextModuleBtn");
+    const submitBtn = document.getElementById("submitBtn");
+
+    if (score >= passingScore) {
+      result.textContent = `Tu puntaje: ${score} / ${total}`;
+      submitBtn.style.display = "none";
+      nextBtn.style.display = "block";
+      nextBtn.style.animation = "fadeIn 0.8s ease forwards";
+    } else {
+      result.textContent = `Tu puntaje fue ${score}/${total}. Inténtalo de nuevo.`;
+      nextBtn.style.display = "none";
+    }
+
+    localStorage.setItem("quiz_score", score);
+  }
+  </script>
+</body>
+</html>
+
+

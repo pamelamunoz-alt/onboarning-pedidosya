@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curso | PedidosYa Partners</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --rosa: #FA0050;
+      --gris-oscuro: #111217;
+      --gris-claro: #1C1E24;
+      --blanco: #FFFFFF;
+      --gris-bloqueado: #555;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      font-family: "Poppins", sans-serif;
+      background-color: var(--gris-oscuro);
+      color: var(--blanco);
+      overflow-x: hidden;
+    }
+
+    /* --- SIDEBAR --- */
+    .sidebar {
+      width: 360px;
+      background-color: var(--gris-claro);
+      padding: 30px 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      overflow-y: auto;
+      box-shadow: 6px 0 15px rgba(0,0,0,0.25);
+    }
+
+    .logo-container {
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 20px;
+    }
+
+    .logo-container img {
+      width: 130px;
+      filter: brightness(1000%);
+    }
+
+    .sidebar h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .timeline { position: relative; margin-top: 10px; }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 18px;
+      width: 2px;
+      height: 100%;
+      background-color: rgba(255,255,255,0.15);
+    }
+
+    .module {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-left: 40px;
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .module.locked {
+      color: var(--gris-bloqueado);
+      cursor: not-allowed;
+    }
+
+    .module.locked i { color: var(--gris-bloqueado); }
+
+    .module.active {
+      color: var(--rosa);
+      transform: translateX(4px);
+    }
+
+    .module::before {
+      content: attr(data-step);
+      position: absolute;
+      left: 5px;
+      top: 0;
+      width: 25px;
+      height: 25px;
+      background-color: var(--gris-oscuro);
+      border: 2px solid var(--rosa);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--blanco);
+    }
+
+    .module i { margin-right: 10px; color: var(--rosa); }
+    .duration { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+    /*  CONTENIDO  */
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #f7f7f7;
+      padding: 30px 50px;
+    }
+
+    .video-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gris-oscuro);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .video-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--rosa);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      max-width: 880px;
+      width: 100%;
+      height: 500px;
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    .video-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      transform: scale(1.05) translateY(-3px);
+      transform-origin: center center;
+      clip-path: inset(3px 0 3px 0 round 15px);
+    }
+
+    .repaso-msg {
+      color: var(--rosa);
+      font-weight: 600;
+      margin-bottom: 15px;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .next-btn {
+      background-color: var(--rosa);
+      color: var(--blanco);
+      padding: 14px 36px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 5px 12px rgba(250, 0, 80, 0.3);
+    }
+
+    .next-btn:hover {
+      background-color: #ff3377;
+      transform: scale(1.05);
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background-color: var(--rosa); border-radius: 10px; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      body { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 15px;
+        padding: 15px;
+      }
+      .content { padding: 20px; }
+      .video-container { height: 320px; }
+      .video-title { font-size: 1.2rem; }
+    }
+
+    @media (max-width: 600px) {
+      .sidebar { flex-wrap: wrap; justify-content: center; }
+      .logo-container img { width: 100px; }
+      .video-title { font-size: 1.1rem; margin-bottom: 10px; }
+      .video-container { height: 220px; border-radius: 12px; }
+      .next-btn { padding: 10px 24px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo-container">
+      <img src="logo-blanco.png" alt="Logo PedidosYa">
+    </div>
+
+    <h2>Clases del curso</h2>
+    <div class="timeline">
+      <div class="module active" data-step="1" data-url="https://drive.google.com/file/d/1zTe4gvzkVi3nvjNnZ4kcVNTFkDvokxFu/preview" data-title="Confirmación y proceso de órdenes">
+        <i class="fa-solid fa-play"></i>
+        <div>
+          <div>Confirmación y proceso de órdenes</div>
+          <div class="duration">01:49 minutos</div>
+        </div>
+      </div>
+
+      <div class="module locked" data-step="2" data-url="https://drive.google.com/file/d/1-TKvhETsxLSqd3nZKo3hm7-iN45HXky9/preview" data-title="Manejo de inventario">
+        <i class="fa-solid fa-play"></i>
+        <div>
+          <div>Manejo de inventario</div>
+          <div class="duration">00:59 minutos</div>
+        </div>
+      </div>
+
+      <div class="module locked" data-step="3" data-url="https://drive.google.com/file/d/17nZfrCmZr4dFWm0mHatrfqUnDtp7HwHZ/preview" data-title="Cambiar estado de tu local">
+        <i class="fa-solid fa-play"></i>
+        <div>
+          <div>Cambiar estado de tu local</div>
+          <div class="duration">00:47 minutos</div>
+        </div>
+      </div>
+
+      <div class="module locked" data-step="4" data-url="https://drive.google.com/file/d/1KZdZqOQkNZINJrZwfeHhk7gm8-G7viPt/preview" data-title="Local con alta demanda">
+        <i class="fa-solid fa-play"></i>
+        <div>
+          <div>Local con alta demanda</div>
+          <div class="duration">00:42 minutos</div>
+        </div>
+      </div>
+
+      <div class="module locked" data-step="5" data-url="https://drive.google.com/file/d/1_36P-2DQ_O7hvSx1JG8l-r8uyQ3we6xq/preview" data-title="Contacto con soporte técnico">
+        <i class="fa-solid fa-play"></i>
+        <div>
+          <div>Contacto con soporte técnico</div>
+          <div class="duration">00:24 minutos</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <main class="content">
+    <div id="repasoMsg" class="repaso-msg" style="display:none;">Estás en modo repaso. Todos los videos están disponibles.</div>
+    <div class="video-title" id="videoTitle">Confirmación y proceso de órdenes</div>
+    <div class="video-container">
+      <iframe id="videoFrame"
+        src="https://drive.google.com/file/d/1zTe4gvzkVi3nvjNnZ4kcVNTFkDvokxFu/preview"
+        allow="autoplay" allowfullscreen>
+      </iframe>
+    </div>
+
+    <button class="next-btn" onclick="goToQuiz()">Siguiente</button>
+  </main>
+
+  <script>
+    // Detectar si el usuario viene del modo libre
+    const modoLibre = localStorage.getItem("modoLibre") === "true";
+    let currentModule = parseInt(localStorage.getItem("currentModule")) || 1;
+
+    function updateModules() {
+      const modules = document.querySelectorAll(".module");
+      modules.forEach((mod, index) => {
+        const step = index + 1;
+        if (modoLibre) {
+          mod.classList.remove("locked");
+          mod.onclick = () => changeVideo(mod);
+        } else {
+          if (step <= currentModule) {
+            mod.classList.remove("locked");
+            mod.onclick = () => changeVideo(mod);
+          } else {
+            mod.classList.add("locked");
+            mod.onclick = null;
+          }
+        }
+      });
+
+      if (modoLibre) {
+        document.getElementById("repasoMsg").style.display = "block";
+      }
+    }
+
+    function changeVideo(mod) {
+      document.getElementById("videoFrame").src = mod.dataset.url;
+      document.getElementById("videoTitle").textContent = mod.dataset.title;
+      document.querySelectorAll(".module").forEach(m => m.classList.remove("active"));
+      mod.classList.add("active");
+    }
+
+    function goToQuiz() {
+      window.location.href = "quiz.html";
+    }
+
+    updateModules();
+  </script>
+</body>
+</html>
+

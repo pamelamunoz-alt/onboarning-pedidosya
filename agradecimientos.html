@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Gracias por participar! | PedidosYa Partners</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rosa: #FA0050;
+      --celeste: #61C8FA;
+      --blanco: #FFFFFF;
+      --gris-fondo: #F7F7F7;
+      --negro: #111217;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: var(--gris-fondo);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      color: var(--negro);
+    }
+
+    .container {
+      background: var(--blanco);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      padding: 40px 50px;
+      max-width: 600px;
+      animation: fadeIn 1s ease;
+    }
+
+    h1 {
+      color: var(--rosa);
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .btn {
+      background-color: var(--rosa);
+      color: var(--blanco);
+      border: none;
+      padding: 14px 36px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      background-color: #ff3377;
+      transform: scale(1.05);
+    }
+
+    #countdown {
+      color: var(--celeste);
+      font-weight: 600;
+      margin-top: 15px;
+      font-size: 1rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🎉 ¡Gracias por participar! 🎉</h1>
+    <p>
+      Has completado exitosamente el curso de capacitación de <strong>PedidosYa Partners</strong>.<br><br>
+      Gracias por tu compromiso y entusiasmo.  
+      Ahora puedes volver a ver los videos del curso cuando lo desees para repasar los temas. 💪
+    </p>
+
+    <button class="btn" onclick="goToCourses()">Volver al curso</button>
+    <p id="countdown">Serás redirigido en 10 segundos...</p>
+  </div>
+
+  <script>
+    function goToCourses() {
+      // Activa el modo libre para repasar los videos
+      localStorage.clear();
+      localStorage.setItem("modoLibre", "true");
+      window.location.href = "curso.html"; 
+    }
+
+    //Redirección automática con cuenta regresiva
+    let timeLeft = 10;
+    const countdown = document.getElementById("countdown");
+
+    const timer = setInterval(() => {
+      timeLeft--;
+      countdown.textContent = `Serás redirigido en ${timeLeft} segundos...`;
+
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        goToCourses();
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
+
