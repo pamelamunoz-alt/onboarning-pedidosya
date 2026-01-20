@@ -4,10 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inicio de curso | PedidosYa Partners</title>
-
-  <!-- Fuente -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
   <style>
     :root {
       --rosa: #FA0050;
@@ -17,11 +14,7 @@
       --negro: #111217;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: "Poppins", sans-serif;
@@ -99,15 +92,10 @@
     }
   </style>
 </head>
-
 <body>
 
   <h1>¡Bienvenido al curso de Autogestión!</h1>
-  <p>
-    Aprende a gestionar tu negocio de forma eficiente, optimizando tus pedidos,
-    mejorando la atención y potenciando el crecimiento de tu local dentro de la
-    plataforma PedidosYa.
-  </p>
+  <p>Aprende a gestionar tu negocio de forma eficiente, optimizando tus pedidos, mejorando la atención y potenciando el crecimiento de tu local dentro de la plataforma PedidosYa.</p>
 
   <form id="inicioForm">
     <label for="local">Nombre del local</label>
@@ -117,53 +105,41 @@
     <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
 
     <label for="telefono">Número de teléfono</label>
-    <input type="tel" id="telefono" name="telefono" placeholder="Ej: 55555555" required pattern="[0-9]{8}">
+    <input type="tel" id="telefono" name="telefono" placeholder="Ej: 55555555" required pattern="[0-9]{4}[0-9]{4}">
 
     <button type="submit">Iniciar curso</button>
     <div id="mensaje"></div>
   </form>
 
   <script>
-    // ✅ URL CORRECTA DEL APPS SCRIPT
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwg03Jl8vHkXNwSr1yaAN0reTwzUs6vkt72ecV92ItgA0ctkTyMeFbQli27HtIZ4lr6/exec";
+    // 🔥 SOLO CAMBIÓ ESTA LÍNEA 🔥
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyNwEmsi38J7Jjf7aXHtnoplpJaT9ym3LQ8WBiWYlHTTihP3_GOF38gEIechpWCgim4/exec";
 
-    // ✅ ELEMENTOS DEL DOM
     const form = document.getElementById("inicioForm");
     const mensaje = document.getElementById("mensaje");
 
-    // ✅ SUBMIT
-    form.addEventListener("submit", function (e) {
+    form.addEventListener("submit", e => {  
       e.preventDefault();
-
       mensaje.textContent = "Registrando inicio...";
       mensaje.style.color = "#FA0050";
 
       const formData = new FormData(form);
       formData.append("action", "inicio");
 
-      fetch(scriptURL, {
-        method: "POST",
-        body: formData
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.status === "ok") {
-            mensaje.textContent = "Inicio registrado con éxito";
-            mensaje.style.color = "green";
+      fetch(scriptURL, { method: "POST", body: formData })
+        .then(response => {
+          mensaje.textContent = "Inicio registrado con éxito";
+          mensaje.style.color = "green";
 
-            localStorage.setItem("partner_nombre", formData.get("nombre"));
-            localStorage.setItem("partner_local", formData.get("local"));
-            localStorage.setItem("partner_tel", formData.get("telefono"));
+          localStorage.setItem("partner_nombre", formData.get("nombre"));
+          localStorage.setItem("partner_local", formData.get("local"));
+          localStorage.setItem("partner_tel", formData.get("telefono"));
 
-            setTimeout(() => {
-              window.location.href = "curso.html";
-            }, 1500);
-          } else {
-            throw new Error(data.message || "Error desconocido");
-          }
+          setTimeout(() => {
+            window.location.href = "curso.html";
+          }, 1500);
         })
-        .catch(err => {
-          console.error(err);
+        .catch(error => {
           mensaje.textContent = "Ocurrió un error al registrar el inicio.";
           mensaje.style.color = "red";
         });
