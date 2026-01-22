@@ -6,6 +6,7 @@
   <title>Curso 5 | Contacto con soporte técnico | PedidosYa Partners</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     :root {
       --rosa: #FA0050;
@@ -162,58 +163,9 @@
     }
 
     .next-btn:hover { background-color: #ff3377; transform: scale(1.05); }
-
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-thumb { background-color: var(--rosa); border-radius: 10px; }
-
-    /* Tablets */
-    @media (max-width: 900px) {
-      body { flex-direction: column; }
-      .sidebar {
-        width: 100%;
-        height: auto;
-        flex-direction: row;
-        overflow-x: auto;
-        overflow-y: hidden;
-        gap: 15px;
-        padding: 15px;
-      }
-      .content { padding: 20px; }
-      .video-container { height: 320px; }
-      .video-title { font-size: 1.2rem; }
-    }
-
-    /* Telefonos */
-    @media (max-width: 600px) {
-      .sidebar {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .logo-container img { width: 100px; }
-
-      .sidebar h2 {
-        font-size: 1rem;
-        text-align: center;
-      }
-
-      .video-title {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-      }
-
-      .video-container {
-        height: 220px;
-        border-radius: 12px;
-      }
-
-      .next-btn {
-        padding: 10px 24px;
-        font-size: 0.9rem;
-      }
-    }
   </style>
 </head>
+
 <body>
 
   <!-- SIDEBAR -->
@@ -224,17 +176,39 @@
 
     <h2>Clases del curso</h2>
     <div class="timeline">
-      <div class="module completed" data-step="1"><i class="fa-solid fa-play"></i><div><div>Confirmación y proceso de órdenes</div><div class="duration">01:49 minutos</div></div></div>
-      <div class="module completed" data-step="2"><i class="fa-solid fa-play"></i><div><div>Manejo de inventario</div><div class="duration">00:59 minutos</div></div></div>
-      <div class="module completed" data-step="3"><i class="fa-solid fa-play"></i><div><div>Cambiar estado de tu local</div><div class="duration">00:47 minutos</div></div></div>
-      <div class="module completed" data-step="4"><i class="fa-solid fa-play"></i><div><div>Local con alta demanda</div><div class="duration">00:42 minutos</div></div></div>
-      <div class="module active" data-step="5" data-url="https://drive.google.com/file/d/1T6Q4BJN8kT5WqBQaapQQJhPeA3df9XtP/preview" data-title="Contacto con soporte técnico"><i class="fa-solid fa-play"></i><div><div>Contacto con soporte técnico</div><div class="duration">00:24 minutos</div></div></div>
+      <div class="module completed" data-step="1">
+        <i class="fa-solid fa-play"></i>
+        <div><div>Confirmación y proceso de órdenes</div><div class="duration">01:49 minutos</div></div>
+      </div>
+
+      <div class="module completed" data-step="2">
+        <i class="fa-solid fa-play"></i>
+        <div><div>Manejo de inventario</div><div class="duration">00:59 minutos</div></div>
+      </div>
+
+      <div class="module completed" data-step="3">
+        <i class="fa-solid fa-play"></i>
+        <div><div>Cambiar estado de tu local</div><div class="duration">00:47 minutos</div></div>
+      </div>
+
+      <div class="module completed" data-step="4">
+        <i class="fa-solid fa-play"></i>
+        <div><div>Local con alta demanda</div><div class="duration">00:42 minutos</div></div>
+      </div>
+
+      <div class="module active" data-step="5"
+        data-url="https://drive.google.com/file/d/1T6Q4BJN8kT5WqBQaapQQJhPeA3df9XtP/preview"
+        data-title="Contacto con soporte técnico">
+        <i class="fa-solid fa-play"></i>
+        <div><div>Contacto con soporte técnico</div><div class="duration">00:24 minutos</div></div>
+      </div>
     </div>
   </aside>
 
   <!-- CONTENIDO -->
   <main class="content">
     <div class="video-title" id="videoTitle">Contacto con soporte técnico</div>
+
     <div class="video-container">
       <iframe id="videoFrame"
         src="https://drive.google.com/file/d/1T6Q4BJN8kT5WqBQaapQQJhPeA3df9XtP/preview"
@@ -246,8 +220,12 @@
   </main>
 
   <script>
-    let currentModule = parseInt(localStorage.getItem("currentModule")) || 1;
+    // --- Estado del curso ---
+    let currentModule = parseInt(localStorage.getItem("currentModule")) || 5;
+
+    // Blindaje: el curso 5 NO puede salir de rango
     if (currentModule < 5) currentModule = 5;
+    if (currentModule > 5) currentModule = 5;
 
     function updateModules() {
       const modules = document.querySelectorAll(".module");
@@ -263,14 +241,13 @@
     }
 
     function goToQuiz() {
-      localStorage.setItem("currentModule", 6);
+      // Importante: NO usar 6
+      localStorage.setItem("currentModule", 5);
       window.location.href = "quiz5.html";
     }
 
     updateModules();
   </script>
+
 </body>
-
 </html>
-
-
