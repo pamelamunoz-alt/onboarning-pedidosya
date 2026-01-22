@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Curso 5 | Contacto con soporte técnico | PedidosYa Partners</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -24,7 +25,7 @@
       font-family: "Poppins", sans-serif;
       background-color: var(--gris-oscuro);
       color: var(--blanco);
-      overflow-x: hidden; 
+      overflow-x: hidden;
     }
 
     /* --- SIDEBAR --- */
@@ -56,7 +57,11 @@
       margin-bottom: 10px;
     }
 
-    .timeline { position: relative; margin-top: 10px; }
+    .timeline {
+      position: relative;
+      margin-top: 10px;
+    }
+
     .timeline::before {
       content: "";
       position: absolute;
@@ -76,8 +81,10 @@
       transition: 0.3s ease;
     }
 
-    .module.locked { color: var(--gris-bloqueado); cursor: not-allowed; }
-    .module.locked i { color: var(--gris-bloqueado); }
+    .module.locked {
+      color: var(--gris-bloqueado);
+      cursor: not-allowed;
+    }
 
     .module.active {
       color: var(--rosa);
@@ -85,7 +92,9 @@
       font-weight: 600;
     }
 
-    .module.completed { color: var(--rosa); }
+    .module.completed {
+      color: var(--rosa);
+    }
 
     .module::before {
       content: attr(data-step);
@@ -104,8 +113,16 @@
       color: var(--blanco);
     }
 
-    .module i { margin-right: 10px; color: var(--rosa); }
-    .duration { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+    .module i {
+      margin-right: 10px;
+      color: var(--rosa);
+    }
+
+    .duration {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 2px;
+    }
 
     /* --- CONTENIDO --- */
     .content {
@@ -135,7 +152,6 @@
       width: 100%;
       height: 500px;
       margin-bottom: 25px;
-      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -145,8 +161,6 @@
       width: 100%;
       height: 100%;
       border: none;
-      transform: scale(1.03) translateY(-2px);
-      transform-origin: center center;
       clip-path: inset(2px 0 2px 0 round 20px);
     }
 
@@ -162,7 +176,10 @@
       box-shadow: 0 5px 12px rgba(250, 0, 80, 0.3);
     }
 
-    .next-btn:hover { background-color: #ff3377; transform: scale(1.05); }
+    .next-btn:hover {
+      background-color: #ff3377;
+      transform: scale(1.05);
+    }
   </style>
 </head>
 
@@ -175,44 +192,59 @@
     </div>
 
     <h2>Clases del curso</h2>
+
     <div class="timeline">
       <div class="module completed" data-step="1">
         <i class="fa-solid fa-play"></i>
-        <div><div>Confirmación y proceso de órdenes</div><div class="duration">01:49 minutos</div></div>
+        <div>
+          <div>Confirmación y proceso de órdenes</div>
+          <div class="duration">01:49 minutos</div>
+        </div>
       </div>
 
       <div class="module completed" data-step="2">
         <i class="fa-solid fa-play"></i>
-        <div><div>Manejo de inventario</div><div class="duration">00:59 minutos</div></div>
+        <div>
+          <div>Manejo de inventario</div>
+          <div class="duration">00:59 minutos</div>
+        </div>
       </div>
 
       <div class="module completed" data-step="3">
         <i class="fa-solid fa-play"></i>
-        <div><div>Cambiar estado de tu local</div><div class="duration">00:47 minutos</div></div>
+        <div>
+          <div>Cambiar estado de tu local</div>
+          <div class="duration">00:47 minutos</div>
+        </div>
       </div>
 
       <div class="module completed" data-step="4">
         <i class="fa-solid fa-play"></i>
-        <div><div>Local con alta demanda</div><div class="duration">00:42 minutos</div></div>
+        <div>
+          <div>Local con alta demanda</div>
+          <div class="duration">00:42 minutos</div>
+        </div>
       </div>
 
-      <div class="module active" data-step="5"
-        data-url="https://drive.google.com/file/d/1T6Q4BJN8kT5WqBQaapQQJhPeA3df9XtP/preview"
-        data-title="Contacto con soporte técnico">
+      <div class="module active" data-step="5">
         <i class="fa-solid fa-play"></i>
-        <div><div>Contacto con soporte técnico</div><div class="duration">00:24 minutos</div></div>
+        <div>
+          <div>Contacto con soporte técnico</div>
+          <div class="duration">00:24 minutos</div>
+        </div>
       </div>
     </div>
   </aside>
 
   <!-- CONTENIDO -->
   <main class="content">
-    <div class="video-title" id="videoTitle">Contacto con soporte técnico</div>
+    <div class="video-title">Contacto con soporte técnico</div>
 
     <div class="video-container">
-      <iframe id="videoFrame"
+      <iframe
         src="https://drive.google.com/file/d/1T6Q4BJN8kT5WqBQaapQQJhPeA3df9XtP/preview"
-        allow="autoplay" allowfullscreen>
+        allow="autoplay"
+        allowfullscreen>
       </iframe>
     </div>
 
@@ -220,33 +252,18 @@
   </main>
 
   <script>
-    // --- Estado del curso ---
-    let currentModule = parseInt(localStorage.getItem("currentModule")) || 5;
-
-    // Blindaje: el curso 5 NO puede salir de rango
-    if (currentModule < 5) currentModule = 5;
-    if (currentModule > 5) currentModule = 5;
-
-    function updateModules() {
-      const modules = document.querySelectorAll(".module");
-      modules.forEach((mod, index) => {
-        const step = index + 1;
-        if (step <= currentModule) {
-          mod.classList.remove("locked");
-          mod.classList.add("completed");
-        } else {
-          mod.classList.add("locked");
-        }
-      });
-    }
+    /*
+      CURSO 5 ES EL ÚLTIMO VIDEO
+      - No depende de currentModule
+      - Siempre carga el mismo iframe
+      - Funciona en repaso
+    */
 
     function goToQuiz() {
-      // Importante: NO usar 6
+      // El curso termina aquí, solo sigue el quiz
       localStorage.setItem("currentModule", 5);
       window.location.href = "quiz5.html";
     }
-
-    updateModules();
   </script>
 
 </body>
