@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inicio de curso | PedidosYa Partners</title>
+  <title>Finalización de curso | PedidosYa Partners</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -94,8 +94,7 @@
 </head>
 <body>
 
-  <h1>¡Bienvenido al curso de Autogestión!</h1>
-  <p>Aprende a gestionar tu negocio de forma eficiente, optimizando tus pedidos, mejorando la atención y potenciando el crecimiento de tu local dentro de la plataforma PedidosYa.</p>
+  <h1>¡Llena el formulario de participación!</h1>
 
   <form id="inicioForm">
     <label for="local">Nombre del local</label>
@@ -112,8 +111,7 @@
   </form>
 
   <script>
-    // 🔥 SOLO CAMBIÓ ESTA LÍNEA 🔥
-    const scriptURL = "https://script.google.com/macros/s/AKfycbw8uZmogA2TxfMq_aV6RsYlYieJvASqgQ2uBQ54J0qOmefoPVRotpBfjV18Zyn-gIFo/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzelbF9IQDrB_eE7WTHf-Oz3E-z-9hFdWUUzMQE1X_zx5B9fF7NXxWz93Ma8kJuYsNJ/exec";
     const form = document.getElementById("inicioForm");
     const mensaje = document.getElementById("mensaje");
 
@@ -135,7 +133,7 @@
           localStorage.setItem("partner_tel", formData.get("telefono"));
 
           setTimeout(() => {
-            window.location.href = "curso.html";
+            window.location.href = "agradecimientos.html";
           }, 1500);
         })
         .catch(error => {
