@@ -188,7 +188,10 @@
   </div>
 
   <script>
-    //  Respuestas correctas
+    // 🔒 FIX: limpiar cualquier intento previo
+    localStorage.removeItem("quiz2_score");
+
+    // Respuestas correctas
     const correctAnswers = {
       q1: "d",
       q2: "b",
@@ -204,42 +207,37 @@
 
     function checkQuiz() {
       const keys = Object.keys(correctAnswers);
-      const answers = {};
-      let missing = [];
+      let score = 0;
 
       for (const k of keys) {
         const v = getAnswer(k);
-        if (v === null) missing.push(k);
-        answers[k] = v;
-      }
-
-      if (missing.length) {
-        alert("Por favor, responde todas las preguntas antes de enviar.");
-        return;
-      }
-
-      let score = 0;
-      for (const k of keys) {
-        if (answers[k] === correctAnswers[k]) score++;
+        if (v === null) {
+          alert("Por favor, responde todas las preguntas antes de enviar.");
+          return;
+        }
+        if (v === correctAnswers[k]) score++;
       }
 
       const total = keys.length;
-      const passingScore = total; 
       const result = document.getElementById("result");
       const nextBtn = document.getElementById("nextModuleBtn");
       const submitBtn = document.getElementById("submitBtn");
 
-      if (score >= passingScore) {
+      // ✅ SOLO pasa con 5/5
+      if (score === total) {
         result.textContent = `Tu puntaje: ${score} / ${total}`;
         submitBtn.style.display = "none";
         nextBtn.style.display = "block";
         nextBtn.style.animation = "fadeIn 0.8s ease forwards";
+        localStorage.setItem("quiz2_score", score);
       } else {
-        result.textContent = `Tu puntaje fue ${score}/${total}. Inténtalo nuevamente.`;
+        // ❌ Forzar repetición
+        result.textContent = `Tu puntaje fue ${score}/${total}. Debes responder correctamente todas las preguntas para continuar.`;
         nextBtn.style.display = "none";
+        submitBtn.style.display = "block";
+        localStorage.removeItem("quiz2_score");
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
-
-      localStorage.setItem("quiz2_score", score);
     }
 
     function goToNextModule() {
@@ -250,4 +248,3 @@
 
 </body>
 </html>
-

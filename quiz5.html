@@ -125,7 +125,7 @@
       <label><input type="radio" name="q3" value="d">Generar descuentos</label>
     </div>
 
-    <button type="button" class="btn" onclick="checkQuiz()">Enviar respuestas</button>
+    <button type="button" class="btn" id="submitBtn" onclick="checkQuiz()">Enviar respuestas</button>
   </form>
 
   <div id="result"></div>
@@ -134,6 +134,9 @@
 </div>
 
 <script>
+  // 🔒 FIX: limpiar cualquier intento previo
+  localStorage.removeItem("quiz_final_score");
+
   const correctAnswers = { q1: "a", q2: "d", q3: "c" };
 
   function getAnswer(name) {
@@ -142,9 +145,10 @@
   }
 
   function checkQuiz() {
+    const keys = Object.keys(correctAnswers);
     let score = 0;
 
-    for (const q in correctAnswers) {
+    for (const q of keys) {
       const ans = getAnswer(q);
       if (!ans) {
         alert("Por favor, responde todas las preguntas.");
@@ -153,11 +157,24 @@
       if (ans === correctAnswers[q]) score++;
     }
 
-    document.getElementById("result").textContent =
-      `Tu puntaje: ${score} / 3`;
+    const total = keys.length;
+    const result = document.getElementById("result");
+    const nextBtn = document.getElementById("nextModuleBtn");
+    const submitBtn = document.getElementById("submitBtn");
 
-    if (score === 3) {
-      document.getElementById("nextModuleBtn").style.display = "block";
+    // ✅ SOLO pasa con 3/3
+    if (score === total) {
+      result.textContent = `Tu puntaje: ${score} / ${total}`;
+      submitBtn.style.display = "none";
+      nextBtn.style.display = "block";
+      localStorage.setItem("quiz_final_score", score);
+    } else {
+      // ❌ Forzar repetición
+      result.textContent = `Tu puntaje fue ${score}/${total}. Debes responder correctamente todas las preguntas para continuar.`;
+      nextBtn.style.display = "none";
+      submitBtn.style.display = "block";
+      localStorage.removeItem("quiz_final_score");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }
 
